@@ -42,31 +42,35 @@ public class MainServer {
         QuizManager quiz = new QuizManager();
 
         // 🔥 GAME LOOP
-        for (Question q : quiz.getQuestions()) {
+       int count = 0;
 
-            out1.println(q.getQuestion());
-            out2.println(q.getQuestion());
+for (Question q : quiz.getQuestions()) {
+    if (count == 10) break;
 
-            String ans1 = in1.readLine();
-            String ans2 = in2.readLine();
+    out1.println(q.getQuestion());
+    out2.println(q.getQuestion());
 
-            // Player 1
-            if (ans1 != null && q.checkAnswer(ans1)) {
-                p1.addScore(1);
-                out1.println("Correct! Score: " + p1.getScore());
-            } else {
-                out1.println("Wrong! Score: " + p1.getScore());
-            }
+    String ans1 = in1.readLine();
+    String ans2 = in2.readLine();
 
-            // Player 2
-            if (ans2 != null && q.checkAnswer(ans2)) {
-                p2.addScore(1);
-                out2.println("Correct! Score: " + p2.getScore());
-            } else {
-                out2.println("Wrong! Score: " + p2.getScore());
-            }
-        }
+    // Player 1
+    if (ans1 != null && q.checkAnswer(ans1)) {
+        p1.addScore(1);
+        out1.println("Correct! Score: " + p1.getScore());
+    } else {
+        out1.println("Wrong! Score: " + p1.getScore());
+    }
 
+    // Player 2
+    if (ans2 != null && q.checkAnswer(ans2)) {
+        p2.addScore(1);
+        out2.println("Correct! Score: " + p2.getScore());
+    } else {
+        out2.println("Wrong! Score: " + p2.getScore());
+    }
+
+    count++;  // 🔥 important
+}
         // 🔥 WINNER
         String winner;
         if (p1.getScore() > p2.getScore()) {
